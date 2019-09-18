@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+   <div class="container">
+      <div class="mx-auto">
+<h1>New Task</h1>
+     <div class="form-group">
+       <form (submit)="onSubmit()">
+         <!-- <p> {{ newTask | json }} </p> -->
+         <label for="exampleInputEmail1">Title</label>
+         <input id="top" class="form-control" type="text" name="newTask.title" [(ngModel)]="newTask.title"/>
+         <label for="exampleInputEmail1">Description</label>
+         <input class="form-control" type="text" name="newTask.description" [(ngModel)]="newTask.description"/>
+         <button type="submit" class="btn btn-primary" value ="Create Task">Submit</button>
+        </form>
+      </div>
+      
+      <table class="table table-striped">
+        <thead>
+            <h1>Task List</h1>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope ="col">Completed</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let task of tasks">
+            <tr>
+              <td>{{task._id}}</td>
+              <td>{{task.title}}</td>
+              <td>{{task.description}}</td>
+              <td>{{task.completed}}</td>
+              <td><button type="submit" class="btn btn-primary" (click)="editForm(task)">Edit</button>
+                <button type="submit" class="btn btn-secondary" (click)="onDelete(task)">Delete</button>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      <div>
+        <div class= "form-group" *ngIf="editTog">
+          <h1>Edit a Task</h1>
+          <form (submit)="onEdit()">
+            <p class="text-danger">{{ err.title }}</p>
+            <input class="form-control" type="text" name="editTask.title" [(ngModel)]="editTask.title">
+            <p class="text-danger">{{ err.description }}</p>
+            <input class="form-control" type="text" name="editTask.description" [(ngModel)]="editTask.description">
+            <input class="form-control" type="text" name="editTask.completed" [(ngModel)]="editTask.completed">
+            <button type="submit" class="btn btn-secondary" value="edit">Confirm</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- <h1>{{title}}</h1>
+  <div id="btndiv">
+    <button id="gatbtn" (click)="getTasksFromService()" >Get All Tasks</button>
+    <p></p>
+    <div id="info" *ngIf="green"> -->
+    </body>
+    </html>
+      
